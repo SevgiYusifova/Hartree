@@ -1,23 +1,38 @@
-import { Pagination, Table, VerticalGroup } from '@grafana/ui';
-import { FieldType, toDataFrame } from '@grafana/data'
-import React, { FC } from 'react';
+import { Pagination, Table } from '@grafana/ui';
+import { FieldType, toDataFrame, applyFieldOverrides } from '@grafana/data'
+import React, { FC, useState } from 'react';
+import { config } from '@grafana/runtime';
+import * as _ from 'lodash';
 
 export const ProductTable: FC = () => {
 
-  let productNames = ['OLS-29', 'KT-OP', 'OLS-29', 'KT-OP']
+  let productNames: string[] = ['OLS-29', 'KT-OP', 'OLS-29', 'KT-OP', 'OLS-29', 'KT-OP', 'OLS-29', 'KT-OP']
 
-  const data = toDataFrame({
+  const [page, setPage] = useState(1);
+
+  const product_data = toDataFrame({
     name: 'Products',
-    fields: [
-      { name: 'Product names', type: FieldType.string, values: productNames },
-    ],
+    refId: 'A',
+    fields: [{ name: 'Product Name', type: FieldType.string, values: _.take(productNames, 10) }],
+  });
+
+  const renderable_product_data = applyFieldOverrides({
+    data: [product_data],
+    fieldConfig: {
+      overrides: [],
+      defaults: {},
+    },
+    theme: config.theme as any,
+    replaceVariables: (value: string) => value,
   });
 
 
   return (
-    <VerticalGroup >
-      <Table data={data} width={30} height={30} />
-      <Pagination numberOfPages={10} currentPage={1} onNavigate={() => fetchPage(2)}/>
-    </VerticalGroup>
+    <div style={{ marginTop: '30px' }}>
+      <Table data={renderable_product_data[0]} width={700} height={300} />
+      <div style={{marginTop: '20px', paddingBottom: '0px',display: 'flex', justifyContent: 'center'}}>
+        <Pagination numberOfPages={10} currentPage={page} onNavigate={setPage} />
+      </div>
+    </div>
   )
 }

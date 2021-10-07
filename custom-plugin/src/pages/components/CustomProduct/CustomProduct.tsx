@@ -1,6 +1,6 @@
 import { SelectableValue } from '@grafana/data';
 import React, { FC, useState } from 'react';
-import { Button, IconButton, Select, Switch, HorizontalGroup, Input, } from "@grafana/ui";
+import { Button, IconButton, Select, Switch, HorizontalGroup, Input } from "@grafana/ui";
 
 
 var stylingObject = {
@@ -39,7 +39,7 @@ export const CustomProduct: FC = () => {
               }}
               isClearable
             />
-            <IconButton size={'lg'} name={'link'} variant={'secondary'} style={{ margin: '0px 20px 0px 5px' }} />
+            <IconButton size={'lg'} name={'link'} variant={'secondary'} style={{ marginLeft: '20px', marginRight: '20px' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Select
@@ -52,11 +52,7 @@ export const CustomProduct: FC = () => {
               }}
               isClearable
             />
-            {/* <DeleteButton
-                onConfirm={() => {
-                  action('Deleted')('delete!');
-                }}
-              /> */}
+            <Button variant='destructive' size="md" icon={'times'} style={{ marginLeft: '20px' }} />
           </div>
         </div>
 
@@ -73,7 +69,7 @@ export const CustomProduct: FC = () => {
               }}
               isClearable
             />
-            <IconButton size={'lg'} name={'link'} style={{ margin: '0px 20px 0px 5px' }} variant={'secondary'} />
+            <IconButton size={'lg'} name={'link'} style={{ marginLeft: '20px', marginRight: '20px' }} variant={'secondary'} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Select
@@ -86,18 +82,14 @@ export const CustomProduct: FC = () => {
               }}
               isClearable
             />
-            {/* <DeleteButton
-                onConfirm={() => {
-                  action('Deleted')('delete!');
-                }}
-              /> */}
+            <Button variant='destructive' size="md" icon={'times'} style={{ marginLeft: '20px' }} />
           </div>
         </div>
 
 
         <hr style={stylingObject.line} />
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button icon="plus" size="md">
+          <Button icon="plus" size="md" style={{margin: '15px 0px 8px 0px'}}>
             ADD
           </Button>
         </div>
